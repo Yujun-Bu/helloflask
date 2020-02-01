@@ -14,7 +14,7 @@ app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
 user = {
-    'username': 'Grey Li',
+    'username': 'Jakko',
     'bio': 'A boy who loves movies and music.',
 }
 
@@ -70,7 +70,7 @@ def baz(n):
 
 
 @app.route('/watchlist2')
-def watchlist_with_static():
+def watchlist2():
     return render_template('watchlist_with_static.html', user=user, movies=movies)
 
 
