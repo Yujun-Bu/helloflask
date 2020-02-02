@@ -21,10 +21,21 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log in')
 
 
+class MyBaseForm(FlaskForm):
+    class Meta:
+        locals = ['en']
+
+class HelloForm(MyBaseForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Log in')
+
+
 # custom validator
 class FortyTwoForm(FlaskForm):
     answer = IntegerField('The Number')
-    submit = SubmitField()
+    submit = SubmitField('Verify it')
 
     def validate_answer(form, field):
         if field.data != 42:
@@ -34,7 +45,7 @@ class FortyTwoForm(FlaskForm):
 # upload form
 class UploadForm(FlaskForm):
     photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
-    submit = SubmitField()
+    submit = SubmitField('Show Photo')
 
 
 # multiple files upload form

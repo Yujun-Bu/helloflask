@@ -15,7 +15,7 @@ from flask_wtf.csrf import validate_csrf
 from wtforms import ValidationError
 
 from forms import LoginForm, FortyTwoForm, NewPostForm, UploadForm, MultiUploadForm, SigninForm, \
-    RegisterForm, SigninForm2, RegisterForm2, RichTextForm
+    RegisterForm, SigninForm2, RegisterForm2, RichTextForm, HelloForm
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'secret string')
@@ -77,6 +77,15 @@ def bootstrap():
         return redirect(url_for('index'))
     return render_template('bootstrap.html', form=form)
 
+app.config['WTF_I18N_ENABLED'] = False
+@app.route('/bootstrap2', methods=['GET', 'POST'])
+def bootstrap2():
+    form = HelloForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        flash('Welcome home, %s!' % username)
+        return redirect(url_for('index'))
+    return render_template('bootstrap.html', form=form)
 
 @app.route('/custom-validator', methods=['GET', 'POST'])
 def custom_validator():
