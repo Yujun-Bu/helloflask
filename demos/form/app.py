@@ -209,6 +209,7 @@ def multi_form():
     register_form = RegisterForm()
 
     if signin_form.submit1.data and signin_form.validate():
+    #if signin_form.validate_on_submit():
         username = signin_form.username.data
         flash('%s, you just submit the Signin Form.' % username)
         return redirect(url_for('index'))
